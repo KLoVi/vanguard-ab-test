@@ -12,17 +12,17 @@ The project was divided in four main steps, as following:
 1. EDA and Data Cleaning of three data sets:
 
 - Client Profiles (df_final_demo): Demographics like age, gender, and account details of our clients.
-- Digital Footprints (df_final_web_data): A detailed trace of client interactions online, divided into two parts: pt_1 and pt_2, which were further merged
+- Digital Footprints (df_final_web_data): A detailed trace of client interactions online, divided into two parts: pt_1 and pt_2, which were further merged (df_pt_1&_2_merged.csv)
 - Experiment Roster (df_final_experiment_clients): A list revealing which clients were part of the grand experiment.
 
 After performing exploration and cleaning actions in datasets, the list of clients 
-a. pt_1 and pt_2, merged, cleaned and filtered: 
-b. Client profiles, cleaned and filtered:
-c. Experiment Roster, cleaned:
+a. pt_1 and pt_2, merged, cleaned and filtered: (df_pt_1&2_ABC.csv)
+b. Client profiles, cleaned and filtered: ()
+c. Experiment Roster, cleaned: (df_final_clients.csv)
 
 Besides, for further steps, we decided to split the "Digital Footprints, last version" in two datasets:
-- Control Group
-- Test Group
+- Control Group (df_control.csv) 
+- Test Group (df_test.csv)
 
 2. Performance Metrics: 
 
