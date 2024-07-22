@@ -24,6 +24,7 @@
       <connection class='federated'>
         <named-connections>
           <named-connection caption='Completion_rates' name='textscan.0bsutkt06bbz4f18qbjxt0tv1drg'>
+            <connection class='textclean' cleaning='yes' compat='no' csvFile='/Users/karollvivianalopezvillegas/GitHub/vanguard-ab-test/Tableau/Data_sets_toTableau/Completion_rates.csv' dataRefreshTime='' directory='/Users/karollvivianalopezvillegas/GitHub/vanguard-ab-test/Tableau/Data_sets_toTableau' filename='/var/folders/v4/fgnr7b6s2fdbdy6vyj585tz40000gn/T/tableau-temp/0q6yfzb096ghdd1030hnl0d1winj/Completion_rates.csv.xlsx' interpretationMode='8' password='' server='' validate='no' />
           </named-connection>
           <named-connection caption='Time_on_each_step' name='textscan.05138uy1d6v2xo16zu9n60g15dlf'>
             <connection class='textclean' cleaning='yes' compat='no' csvFile='/Users/karollvivianalopezvillegas/GitHub/vanguard-ab-test/Tableau/Data_sets_toTableau/Time_on_each_step.csv' dataRefreshTime='' directory='/Users/karollvivianalopezvillegas/GitHub/vanguard-ab-test/Tableau/Data_sets_toTableau' filename='/var/folders/v4/fgnr7b6s2fdbdy6vyj585tz40000gn/T/tableau-temp/1m8hjkz1mnc5x811jsdjs144cn3z/Time_on_each_step.csv.xlsx' interpretationMode='8' password='' server='' validate='no' />
