@@ -4,6 +4,8 @@
 <workbook original-version='18.1' source-build='2024.2.0 (20242.24.0613.1930)' source-platform='mac' version='18.1' xmlns:user='http://www.tableausoftware.com/xml/user'>
   <document-format-change-manifest>
     <_.fcp.AnimationOnByDefault.true...AnimationOnByDefault />
+    <IntuitiveSorting />
+    <IntuitiveSorting_SP2 />
     <_.fcp.MarkAnimation.true...MarkAnimation />
     <_.fcp.ObjectModelEncapsulateLegacy.true...ObjectModelEncapsulateLegacy />
     <_.fcp.ObjectModelTableType.true...ObjectModelTableType />
@@ -434,14 +436,33 @@
         </metadata-records>
       </connection>
       <aliases enabled='yes' />
+      <column aggregation='None' caption='Bal (agrupación)' datatype='integer' name='[Bal (agrupación)]' role='dimension' type='ordinal'>
+        <calculation class='bin' decimals='4' formula='[bal]' peg='0' size='100000' />
+      </column>
+      <column caption='In Time KPI?' datatype='string' name='[Calculation_861665315621404672]' role='dimension' type='nominal'>
+        <calculation class='tableau' formula='IF NOT ISNULL([steps]) THEN &quot;Included in KPI&quot;&#10;ELSE &quot;NOT Included in KPI&quot;&#10;END' />
+      </column>
+      <column caption='Confirmed?' datatype='string' name='[Calculation_861665315621703681]' role='dimension' type='nominal'>
+        <calculation class='tableau' formula='IF NOT ISNULL([Confirmed]) THEN &quot;Confirmed&quot;&#10;ELSE &quot;NO-Confirmed&quot;&#10;END' />
+      </column>
+      <column caption='Balance' datatype='string' name='[Calculation_861665315664896002]' role='dimension' type='nominal'>
+        <calculation class='tableau' formula='IF [bal] &gt; 2000 THEN &quot;2K to 16,3K&quot;&#10;ELSEIF [bal] &gt; 1000 THEN &quot;1K to 2K&quot;&#10;ELSEIF [bal] &gt; 500 THEN &quot;500 to 1000&quot;&#10;ELSEIF [bal] &gt; 400 THEN &quot;400 to 500&quot;&#10;ELSEIF [bal] &gt; 300 THEN &quot;300 to 400&quot;&#10;ELSEIF [bal] &gt; 200 THEN &quot;200 to 300&quot;&#10;ELSEIF [bal] &gt; 100 THEN &quot;100 to 200&quot;&#10;ELSE &quot;Less than 100&quot;&#10;END' />
+      </column>
+      <column caption='Clnt Age (agrupación)' datatype='integer' name='[Clnt Age (agrupación)]' role='dimension' type='ordinal'>
+        <calculation class='bin' decimals='1' formula='[clnt_age]' peg='0' size='10' />
+      </column>
+      <column aggregation='None' caption='Clnt Tenure Yr (agrupación)' datatype='integer' name='[Clnt Tenure Yr (agrupación)]' role='dimension' type='ordinal'>
+        <calculation class='bin' decimals='0' formula='[clnt_tenure_yr]' peg='0' size='1' />
+      </column>
+      <column datatype='string' name='[Variation]' role='dimension' type='nominal' />
       <column caption='Variation x' datatype='string' name='[Variation_x]' role='dimension' type='nominal' />
       <_.fcp.ObjectModelTableType.true...column caption='df_demo_merged_concat2.csv' datatype='table' name='[__tableau_internal_object_id__].[df_demo_merged_concat2.csv_DD1A456727844763A319727B83FBD599]' role='measure' type='quantitative' />
       <column caption='Age Group' datatype='string' name='[age_group]' role='dimension' type='nominal' />
-      <column caption='Backward Steps' datatype='real' name='[backward_steps]' role='measure' type='quantitative' />
+      <column aggregation='Sum' caption='Backward Steps' datatype='real' name='[backward_steps]' role='dimension' type='ordinal' />
       <column caption='Bal' datatype='real' name='[bal]' role='measure' type='quantitative' />
       <column caption='Calls 6 Mnth' datatype='real' name='[calls_6_mnth]' role='measure' type='quantitative' />
-      <column caption='Client Id' datatype='real' name='[client_id]' role='dimension' type='ordinal' />
-      <column caption='Clnt Age' datatype='real' name='[clnt_age]' role='measure' type='quantitative' />
+      <column caption='Client Id' datatype='real' name='[client_id]' role='measure' type='quantitative' />
+      <column aggregation='Sum' caption='Clnt Age' datatype='real' name='[clnt_age]' role='dimension' type='ordinal' />
       <column caption='Clnt Tenure Mnth' datatype='real' name='[clnt_tenure_mnth]' role='measure' type='quantitative' />
       <column caption='Clnt Tenure Yr' datatype='real' name='[clnt_tenure_yr]' role='dimension' type='quantitative' />
       <column caption='Confirm' datatype='real' name='[confirm]' role='measure' type='quantitative' />
@@ -455,10 +476,23 @@
       <column caption='Steps' datatype='string' name='[steps]' role='dimension' type='nominal' />
       <column aggregation='Hour' caption='Time' datatype='datetime' name='[time]' role='dimension' type='ordinal' />
       <column caption='Total Steps' datatype='real' name='[total_steps]' role='measure' type='quantitative' />
-      <column caption='Visit Id' datatype='string' name='[visit_id]' role='dimension' type='nominal' />
+      <column aggregation='CountD' caption='Visit Id' datatype='string' default-role='measure' default-type='quantitative' name='[visit_id]' role='dimension' type='nominal' />
       <column caption='Visitor Id' datatype='string' name='[visitor_id]' role='dimension' type='nominal' />
       <column caption='Year' datatype='real' name='[year]' role='dimension' type='quantitative' />
+      <column-instance column='[Variation]' derivation='None' name='[none:Variation:nk]' pivot='key' type='nominal' />
       <layout _.fcp.SchemaViewerObjectModel.false...dim-percentage='0.5' _.fcp.SchemaViewerObjectModel.false...measure-percentage='0.4' dim-ordering='alphabetic' measure-ordering='alphabetic' show-structure='true' />
+      <style>
+        <style-rule element='mark'>
+          <encoding attr='color' field='[none:Variation:nk]' type='palette'>
+            <map to='#59a14f'>
+              <bucket>&quot;Test&quot;</bucket>
+            </map>
+            <map to='#bab0ac'>
+              <bucket>&quot;Control&quot;</bucket>
+            </map>
+          </encoding>
+        </style-rule>
+      </style>
       <semantic-values>
         <semantic-value key='[Country].[Name]' value='&quot;Guatemala&quot;' />
       </semantic-values>
@@ -504,7 +538,657 @@
     </datasource>
   </datasources>
   <worksheets>
-    <worksheet name='Hoja 1'>
+    <worksheet name='Age_group'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run>Total clients by age group</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='df_demo_merged_concat2' name='federated.0suagyh0kg0lc61bxzjv80tkk7ql' />
+          </datasources>
+          <datasource-dependencies datasource='federated.0suagyh0kg0lc61bxzjv80tkk7ql'>
+            <column caption='Clnt Age (agrupación)' datatype='integer' name='[Clnt Age (agrupación)]' role='dimension' type='ordinal'>
+              <calculation class='bin' decimals='1' formula='[clnt_age]' peg='0' size='10' />
+            </column>
+            <column caption='Client Id' datatype='real' name='[client_id]' role='measure' type='quantitative' />
+            <column aggregation='Sum' caption='Clnt Age' datatype='real' name='[clnt_age]' role='dimension' type='ordinal' />
+            <column-instance column='[client_id]' derivation='CountD' name='[ctd:client_id:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[visit_id]' derivation='CountD' name='[ctd:visit_id:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Clnt Age (agrupación)]' derivation='None' name='[none:Clnt Age (agrupación):ok]' pivot='key' type='ordinal' />
+            <column aggregation='CountD' caption='Visit Id' datatype='string' default-role='measure' default-type='quantitative' name='[visit_id]' role='dimension' type='nominal' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.0suagyh0kg0lc61bxzjv80tkk7ql].[none:Clnt Age (agrupación):ok]'>
+            <groupfilter from='1' function='range' level='[none:Clnt Age (agrupación):ok]' to='9' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
+          <slices>
+            <column>[federated.0suagyh0kg0lc61bxzjv80tkk7ql].[none:Clnt Age (agrupación):ok]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='axis'>
+            <format attr='height' field='[federated.0suagyh0kg0lc61bxzjv80tkk7ql].[none:Clnt Age (agrupación):ok]' value='20' />
+          </style-rule>
+          <style-rule element='worksheet'>
+            <format attr='display-field-labels' scope='cols' value='false' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <text column='[federated.0suagyh0kg0lc61bxzjv80tkk7ql].[ctd:visit_id:qk]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='true' />
+                <format attr='mark-labels-cull' value='true' />
+              </style-rule>
+              <style-rule element='pane'>
+                <format attr='minheight' value='665' />
+                <format attr='maxheight' value='665' />
+                <format attr='minwidth' value='540' />
+                <format attr='maxwidth' value='540' />
+                <format attr='aspect' value='0' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[federated.0suagyh0kg0lc61bxzjv80tkk7ql].[ctd:client_id:qk]</rows>
+        <cols>[federated.0suagyh0kg0lc61bxzjv80tkk7ql].[none:Clnt Age (agrupación):ok]</cols>
+        <show-full-range>
+          <column>[federated.0suagyh0kg0lc61bxzjv80tkk7ql].[Clnt Age (agrupación)]</column>
+        </show-full-range>
+      </table>
+      <simple-id uuid='{5F46A728-7F24-4F59-8AE0-94A9DEB85654}' />
+    </worksheet>
+    <worksheet name='Age_group_AB'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run>Total clients by age group in A|B Test</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='df_demo_merged_concat2' name='federated.0suagyh0kg0lc61bxzjv80tkk7ql' />
+          </datasources>
+          <datasource-dependencies datasource='federated.0suagyh0kg0lc61bxzjv80tkk7ql'>
+            <column caption='In Time KPI?' datatype='string' name='[Calculation_861665315621404672]' role='dimension' type='nominal'>
+              <calculation class='tableau' formula='IF NOT ISNULL([steps]) THEN &quot;Included in KPI&quot;&#10;ELSE &quot;NOT Included in KPI&quot;&#10;END' />
+            </column>
+            <column caption='Confirmed?' datatype='string' name='[Calculation_861665315621703681]' role='dimension' type='nominal'>
+              <calculation class='tableau' formula='IF NOT ISNULL([Confirmed]) THEN &quot;Confirmed&quot;&#10;ELSE &quot;NO-Confirmed&quot;&#10;END' />
+            </column>
+            <column caption='Clnt Age (agrupación)' datatype='integer' name='[Clnt Age (agrupación)]' role='dimension' type='ordinal'>
+              <calculation class='bin' decimals='1' formula='[clnt_age]' peg='0' size='10' />
+            </column>
+            <column datatype='string' name='[Confirmed]' role='dimension' type='nominal' />
+            <column datatype='string' name='[Variation]' role='dimension' type='nominal' />
+            <column aggregation='Sum' caption='Backward Steps' datatype='real' name='[backward_steps]' role='dimension' type='ordinal' />
+            <column aggregation='Sum' caption='Clnt Age' datatype='real' name='[clnt_age]' role='dimension' type='ordinal' />
+            <column-instance column='[visit_id]' derivation='CountD' name='[ctd:visit_id:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Calculation_861665315621404672]' derivation='None' name='[none:Calculation_861665315621404672:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Calculation_861665315621703681]' derivation='None' name='[none:Calculation_861665315621703681:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Clnt Age (agrupación)]' derivation='None' name='[none:Clnt Age (agrupación):ok]' pivot='key' type='ordinal' />
+            <column-instance column='[Variation]' derivation='None' name='[none:Variation:nk]' pivot='key' type='nominal' />
+            <column-instance column='[backward_steps]' derivation='None' name='[none:backward_steps:ok]' pivot='key' type='ordinal' />
+            <column caption='Steps' datatype='string' name='[steps]' role='dimension' type='nominal' />
+            <column aggregation='CountD' caption='Visit Id' datatype='string' default-role='measure' default-type='quantitative' name='[visit_id]' role='dimension' type='nominal' />
+          </datasource-dependencies>
+          <filter class='quantitative' column='[federated.0suagyh0kg0lc61bxzjv80tkk7ql].[ctd:visit_id:qk]' included-values='in-range'>
+            <min>26</min>
+            <max>6783</max>
+          </filter>
+          <filter class='categorical' column='[federated.0suagyh0kg0lc61bxzjv80tkk7ql].[none:Calculation_861665315621404672:nk]'>
+            <groupfilter function='member' level='[none:Calculation_861665315621404672:nk]' member='&quot;Included in KPI&quot;' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
+          <filter class='categorical' column='[federated.0suagyh0kg0lc61bxzjv80tkk7ql].[none:Calculation_861665315621703681:nk]'>
+            <groupfilter function='level-members' level='[none:Calculation_861665315621703681:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+          </filter>
+          <filter class='categorical' column='[federated.0suagyh0kg0lc61bxzjv80tkk7ql].[none:Clnt Age (agrupación):ok]'>
+            <groupfilter from='1' function='range' level='[none:Clnt Age (agrupación):ok]' to='9' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
+          <filter class='categorical' column='[federated.0suagyh0kg0lc61bxzjv80tkk7ql].[none:Variation:nk]'>
+            <groupfilter function='except' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate'>
+              <groupfilter function='level-members' level='[none:Variation:nk]' />
+              <groupfilter function='member' level='[none:Variation:nk]' member='%null%' />
+            </groupfilter>
+          </filter>
+          <filter class='categorical' column='[federated.0suagyh0kg0lc61bxzjv80tkk7ql].[none:backward_steps:ok]'>
+            <groupfilter function='member' level='[none:backward_steps:ok]' member='5.0' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
+          <slices>
+            <column>[federated.0suagyh0kg0lc61bxzjv80tkk7ql].[none:Calculation_861665315621404672:nk]</column>
+            <column>[federated.0suagyh0kg0lc61bxzjv80tkk7ql].[none:Clnt Age (agrupación):ok]</column>
+            <column>[federated.0suagyh0kg0lc61bxzjv80tkk7ql].[none:backward_steps:ok]</column>
+            <column>[federated.0suagyh0kg0lc61bxzjv80tkk7ql].[none:Calculation_861665315621703681:nk]</column>
+            <column>[federated.0suagyh0kg0lc61bxzjv80tkk7ql].[none:Variation:nk]</column>
+            <column>[federated.0suagyh0kg0lc61bxzjv80tkk7ql].[ctd:visit_id:qk]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='axis'>
+            <format attr='height' field='[federated.0suagyh0kg0lc61bxzjv80tkk7ql].[none:Clnt Age (agrupación):ok]' value='20' />
+          </style-rule>
+          <style-rule element='worksheet'>
+            <format attr='display-field-labels' scope='cols' value='false' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <color column='[federated.0suagyh0kg0lc61bxzjv80tkk7ql].[none:Variation:nk]' />
+              <text column='[federated.0suagyh0kg0lc61bxzjv80tkk7ql].[ctd:visit_id:qk]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='true' />
+                <format attr='mark-labels-cull' value='true' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[federated.0suagyh0kg0lc61bxzjv80tkk7ql].[ctd:visit_id:qk]</rows>
+        <cols>([federated.0suagyh0kg0lc61bxzjv80tkk7ql].[none:Clnt Age (agrupación):ok] / [federated.0suagyh0kg0lc61bxzjv80tkk7ql].[none:Variation:nk])</cols>
+        <show-full-range>
+          <column>[federated.0suagyh0kg0lc61bxzjv80tkk7ql].[Clnt Age (agrupación)]</column>
+        </show-full-range>
+      </table>
+      <simple-id uuid='{42980411-0946-42F6-8274-7C4C8124B56A}' />
+    </worksheet>
+    <worksheet name='Age_group_AB (2)'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run>Total clients by age group in A|B Test</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='df_demo_merged_concat2' name='federated.0suagyh0kg0lc61bxzjv80tkk7ql' />
+          </datasources>
+          <datasource-dependencies datasource='federated.0suagyh0kg0lc61bxzjv80tkk7ql'>
+            <column caption='In Time KPI?' datatype='string' name='[Calculation_861665315621404672]' role='dimension' type='nominal'>
+              <calculation class='tableau' formula='IF NOT ISNULL([steps]) THEN &quot;Included in KPI&quot;&#10;ELSE &quot;NOT Included in KPI&quot;&#10;END' />
+            </column>
+            <column caption='Clnt Age (agrupación)' datatype='integer' name='[Clnt Age (agrupación)]' role='dimension' type='ordinal'>
+              <calculation class='bin' decimals='1' formula='[clnt_age]' peg='0' size='10' />
+            </column>
+            <column datatype='string' name='[Variation]' role='dimension' type='nominal' />
+            <column aggregation='Sum' caption='Backward Steps' datatype='real' name='[backward_steps]' role='dimension' type='ordinal' />
+            <column aggregation='Sum' caption='Clnt Age' datatype='real' name='[clnt_age]' role='dimension' type='ordinal' />
+            <column-instance column='[visit_id]' derivation='CountD' name='[ctd:visit_id:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Calculation_861665315621404672]' derivation='None' name='[none:Calculation_861665315621404672:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Clnt Age (agrupación)]' derivation='None' name='[none:Clnt Age (agrupación):ok]' pivot='key' type='ordinal' />
+            <column-instance column='[Variation]' derivation='None' name='[none:Variation:nk]' pivot='key' type='nominal' />
+            <column-instance column='[backward_steps]' derivation='None' name='[none:backward_steps:ok]' pivot='key' type='ordinal' />
+            <column caption='Steps' datatype='string' name='[steps]' role='dimension' type='nominal' />
+            <column aggregation='CountD' caption='Visit Id' datatype='string' default-role='measure' default-type='quantitative' name='[visit_id]' role='dimension' type='nominal' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.0suagyh0kg0lc61bxzjv80tkk7ql].[none:Calculation_861665315621404672:nk]'>
+            <groupfilter function='member' level='[none:Calculation_861665315621404672:nk]' member='&quot;Included in KPI&quot;' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
+          <slices>
+            <column>[federated.0suagyh0kg0lc61bxzjv80tkk7ql].[none:Calculation_861665315621404672:nk]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='mark'>
+            <encoding attr='size-bar' field='[federated.0suagyh0kg0lc61bxzjv80tkk7ql].[ctd:visit_id:qk]' field-type='quantitative' max-size='1' min-size='0.005' type='centersize' />
+          </style-rule>
+          <style-rule element='worksheet'>
+            <format attr='display-field-labels' scope='cols' value='false' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Square' />
+            <encodings>
+              <color column='[federated.0suagyh0kg0lc61bxzjv80tkk7ql].[ctd:visit_id:qk]' />
+              <text column='[federated.0suagyh0kg0lc61bxzjv80tkk7ql].[ctd:visit_id:qk]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='has-stroke' value='false' />
+                <format attr='mark-labels-show' value='true' />
+                <format attr='mark-labels-cull' value='true' />
+                <format attr='mark-labels-line-first' value='true' />
+                <format attr='mark-labels-line-last' value='true' />
+                <format attr='mark-labels-range-min' value='true' />
+                <format attr='mark-labels-range-max' value='true' />
+                <format attr='mark-labels-mode' value='all' />
+                <format attr='mark-labels-range-scope' value='pane' />
+                <format attr='mark-labels-range-field' value='' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>([federated.0suagyh0kg0lc61bxzjv80tkk7ql].[none:backward_steps:ok] / [federated.0suagyh0kg0lc61bxzjv80tkk7ql].[none:Clnt Age (agrupación):ok])</rows>
+        <cols>[federated.0suagyh0kg0lc61bxzjv80tkk7ql].[none:Variation:nk]</cols>
+      </table>
+      <simple-id uuid='{1FF6A855-E535-4CFD-A72A-7D51AE5F4DF9}' />
+    </worksheet>
+    <worksheet name='Age_histo'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run>Total Clients by Age</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='df_demo_merged_concat2' name='federated.0suagyh0kg0lc61bxzjv80tkk7ql' />
+          </datasources>
+          <datasource-dependencies datasource='federated.0suagyh0kg0lc61bxzjv80tkk7ql'>
+            <column datatype='string' name='[Variation]' role='dimension' type='nominal' />
+            <column caption='Client Id' datatype='real' name='[client_id]' role='measure' type='quantitative' />
+            <column aggregation='Sum' caption='Clnt Age' datatype='real' name='[clnt_age]' role='dimension' type='ordinal' />
+            <column-instance column='[client_id]' derivation='CountD' name='[ctd:client_id:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Variation]' derivation='None' name='[none:Variation:nk]' pivot='key' type='nominal' />
+            <column-instance column='[clnt_age]' derivation='None' name='[none:clnt_age:ok]' pivot='key' type='ordinal' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.0suagyh0kg0lc61bxzjv80tkk7ql].[none:Variation:nk]'>
+            <groupfilter function='except' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate'>
+              <groupfilter function='level-members' level='[none:Variation:nk]' />
+              <groupfilter function='member' level='[none:Variation:nk]' member='%null%' />
+            </groupfilter>
+          </filter>
+          <filter class='categorical' column='[federated.0suagyh0kg0lc61bxzjv80tkk7ql].[none:clnt_age:ok]'>
+            <groupfilter from='17.0' function='range' level='[none:clnt_age:ok]' to='96.0' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
+          <slices>
+            <column>[federated.0suagyh0kg0lc61bxzjv80tkk7ql].[none:clnt_age:ok]</column>
+            <column>[federated.0suagyh0kg0lc61bxzjv80tkk7ql].[none:Variation:nk]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='worksheet'>
+            <format attr='display-field-labels' scope='cols' value='false' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane id='3' selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='false' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[federated.0suagyh0kg0lc61bxzjv80tkk7ql].[ctd:client_id:qk]</rows>
+        <cols>[federated.0suagyh0kg0lc61bxzjv80tkk7ql].[none:clnt_age:ok]</cols>
+      </table>
+      <simple-id uuid='{E77E9705-F683-4EE9-A591-FA5014B5BD62}' />
+    </worksheet>
+    <worksheet name='Ctr_Tst'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='df_demo_merged_concat2' name='federated.0suagyh0kg0lc61bxzjv80tkk7ql' />
+          </datasources>
+          <datasource-dependencies datasource='federated.0suagyh0kg0lc61bxzjv80tkk7ql'>
+            <column caption='Variation x' datatype='string' name='[Variation_x]' role='dimension' type='nominal' />
+            <column caption='Client Id' datatype='real' name='[client_id]' role='measure' type='quantitative' />
+            <column-instance column='[client_id]' derivation='CountD' name='[ctd:client_id:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Variation_x]' derivation='None' name='[none:Variation_x:nk]' pivot='key' type='nominal' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <text column='[federated.0suagyh0kg0lc61bxzjv80tkk7ql].[ctd:client_id:qk]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='true' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[federated.0suagyh0kg0lc61bxzjv80tkk7ql].[none:Variation_x:nk]</rows>
+        <cols />
+      </table>
+      <simple-id uuid='{76F32727-D4E1-4A67-A006-DAF4FDB65C4D}' />
+    </worksheet>
+    <worksheet name='Ctr_Tst (2)'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='df_demo_merged_concat2' name='federated.0suagyh0kg0lc61bxzjv80tkk7ql' />
+          </datasources>
+          <datasource-dependencies datasource='federated.0suagyh0kg0lc61bxzjv80tkk7ql'>
+            <column datatype='string' name='[Variation]' role='dimension' type='nominal' />
+            <column caption='Client Id' datatype='real' name='[client_id]' role='measure' type='quantitative' />
+            <column-instance column='[client_id]' derivation='CountD' name='[ctd:client_id:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Variation]' derivation='None' name='[none:Variation:nk]' pivot='key' type='nominal' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <text column='[federated.0suagyh0kg0lc61bxzjv80tkk7ql].[ctd:client_id:qk]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='true' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[federated.0suagyh0kg0lc61bxzjv80tkk7ql].[none:Variation:nk]</rows>
+        <cols />
+      </table>
+      <simple-id uuid='{9F3BC9C5-3C86-4B40-A01A-FC237821F7D4}' />
+    </worksheet>
+    <worksheet name='Gen'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run>Total Clients per Gender</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='df_demo_merged_concat2' name='federated.0suagyh0kg0lc61bxzjv80tkk7ql' />
+          </datasources>
+          <datasource-dependencies datasource='federated.0suagyh0kg0lc61bxzjv80tkk7ql'>
+            <column caption='Client Id' datatype='real' name='[client_id]' role='measure' type='quantitative' />
+            <column-instance column='[client_id]' derivation='CountD' name='[ctd:client_id:qk]' pivot='key' type='quantitative' />
+            <column caption='Gendr' datatype='string' name='[gendr]' role='dimension' type='nominal' />
+            <column-instance column='[gendr]' derivation='None' name='[none:gendr:nk]' pivot='key' type='nominal' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.0suagyh0kg0lc61bxzjv80tkk7ql].[none:gendr:nk]'>
+            <groupfilter function='except' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate'>
+              <groupfilter function='level-members' level='[none:gendr:nk]' />
+              <groupfilter function='member' level='[none:gendr:nk]' member='%null%' />
+            </groupfilter>
+          </filter>
+          <slices>
+            <column>[federated.0suagyh0kg0lc61bxzjv80tkk7ql].[none:gendr:nk]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='mark'>
+            <encoding attr='size-bar' field='[federated.0suagyh0kg0lc61bxzjv80tkk7ql].[ctd:client_id:qk]' field-type='quantitative' max-size='1' min-size='0.005' type='centersize' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Square' />
+            <encodings>
+              <color column='[federated.0suagyh0kg0lc61bxzjv80tkk7ql].[ctd:client_id:qk]' />
+              <text column='[federated.0suagyh0kg0lc61bxzjv80tkk7ql].[ctd:client_id:qk]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='has-stroke' value='false' />
+                <format attr='mark-labels-show' value='true' />
+                <format attr='mark-labels-cull' value='true' />
+                <format attr='mark-labels-line-first' value='true' />
+                <format attr='mark-labels-line-last' value='true' />
+                <format attr='mark-labels-range-min' value='true' />
+                <format attr='mark-labels-range-max' value='true' />
+                <format attr='mark-labels-mode' value='all' />
+                <format attr='mark-labels-range-scope' value='pane' />
+                <format attr='mark-labels-range-field' value='' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[federated.0suagyh0kg0lc61bxzjv80tkk7ql].[none:gendr:nk]</rows>
+        <cols />
+      </table>
+      <simple-id uuid='{CFA95E43-4682-44A0-A742-BB2B1AC2B209}' />
+    </worksheet>
+    <worksheet name='Gen_'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run>Total Clients per Gender</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='df_demo_merged_concat2' name='federated.0suagyh0kg0lc61bxzjv80tkk7ql' />
+          </datasources>
+          <datasource-dependencies datasource='federated.0suagyh0kg0lc61bxzjv80tkk7ql'>
+            <column caption='Confirmed?' datatype='string' name='[Calculation_861665315621703681]' role='dimension' type='nominal'>
+              <calculation class='tableau' formula='IF NOT ISNULL([Confirmed]) THEN &quot;Confirmed&quot;&#10;ELSE &quot;NO-Confirmed&quot;&#10;END' />
+            </column>
+            <column datatype='string' name='[Confirmed]' role='dimension' type='nominal' />
+            <column datatype='string' name='[Variation]' role='dimension' type='nominal' />
+            <column aggregation='Sum' caption='Backward Steps' datatype='real' name='[backward_steps]' role='dimension' type='ordinal' />
+            <column caption='Client Id' datatype='real' name='[client_id]' role='measure' type='quantitative' />
+            <column-instance column='[client_id]' derivation='CountD' name='[ctd:client_id:qk]' pivot='key' type='quantitative' />
+            <column caption='Gendr' datatype='string' name='[gendr]' role='dimension' type='nominal' />
+            <column-instance column='[Calculation_861665315621703681]' derivation='None' name='[none:Calculation_861665315621703681:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Variation]' derivation='None' name='[none:Variation:nk]' pivot='key' type='nominal' />
+            <column-instance column='[backward_steps]' derivation='None' name='[none:backward_steps:ok]' pivot='key' type='ordinal' />
+            <column-instance column='[gendr]' derivation='None' name='[none:gendr:nk]' pivot='key' type='nominal' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.0suagyh0kg0lc61bxzjv80tkk7ql].[none:Calculation_861665315621703681:nk]'>
+            <groupfilter function='level-members' level='[none:Calculation_861665315621703681:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+          </filter>
+          <filter class='categorical' column='[federated.0suagyh0kg0lc61bxzjv80tkk7ql].[none:Variation:nk]'>
+            <groupfilter function='except' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate'>
+              <groupfilter function='level-members' level='[none:Variation:nk]' />
+              <groupfilter function='member' level='[none:Variation:nk]' member='%null%' />
+            </groupfilter>
+          </filter>
+          <filter class='categorical' column='[federated.0suagyh0kg0lc61bxzjv80tkk7ql].[none:backward_steps:ok]'>
+            <groupfilter function='level-members' level='[none:backward_steps:ok]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+          </filter>
+          <filter class='categorical' column='[federated.0suagyh0kg0lc61bxzjv80tkk7ql].[none:gendr:nk]'>
+            <groupfilter function='except' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate'>
+              <groupfilter function='level-members' level='[none:gendr:nk]' />
+              <groupfilter function='member' level='[none:gendr:nk]' member='%null%' />
+            </groupfilter>
+          </filter>
+          <slices>
+            <column>[federated.0suagyh0kg0lc61bxzjv80tkk7ql].[none:gendr:nk]</column>
+            <column>[federated.0suagyh0kg0lc61bxzjv80tkk7ql].[none:Variation:nk]</column>
+            <column>[federated.0suagyh0kg0lc61bxzjv80tkk7ql].[none:Calculation_861665315621703681:nk]</column>
+            <column>[federated.0suagyh0kg0lc61bxzjv80tkk7ql].[none:backward_steps:ok]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='mark'>
+            <encoding attr='size-bar' field='[federated.0suagyh0kg0lc61bxzjv80tkk7ql].[ctd:client_id:qk]' field-type='quantitative' max-size='1' min-size='0.005' type='centersize' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <color column='[federated.0suagyh0kg0lc61bxzjv80tkk7ql].[none:Variation:nk]' />
+              <text column='[federated.0suagyh0kg0lc61bxzjv80tkk7ql].[ctd:client_id:qk]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='true' />
+                <format attr='mark-labels-cull' value='true' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[federated.0suagyh0kg0lc61bxzjv80tkk7ql].[ctd:client_id:qk]</rows>
+        <cols>([federated.0suagyh0kg0lc61bxzjv80tkk7ql].[none:gendr:nk] / [federated.0suagyh0kg0lc61bxzjv80tkk7ql].[none:Variation:nk])</cols>
+      </table>
+      <simple-id uuid='{5D9E41DE-5778-4B9F-990B-202A9811A1EB}' />
+    </worksheet>
+    <worksheet name='Tenure'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run>Number of clients by Tenure (Years)
+</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='df_demo_merged_concat2' name='federated.0suagyh0kg0lc61bxzjv80tkk7ql' />
+          </datasources>
+          <datasource-dependencies datasource='federated.0suagyh0kg0lc61bxzjv80tkk7ql'>
+            <column aggregation='None' caption='Clnt Tenure Yr (agrupación)' datatype='integer' name='[Clnt Tenure Yr (agrupación)]' role='dimension' type='ordinal'>
+              <calculation class='bin' decimals='0' formula='[clnt_tenure_yr]' peg='0' size='1' />
+            </column>
+            <column caption='Client Id' datatype='real' name='[client_id]' role='measure' type='quantitative' />
+            <column caption='Clnt Tenure Yr' datatype='real' name='[clnt_tenure_yr]' role='dimension' type='quantitative' />
+            <column-instance column='[client_id]' derivation='CountD' name='[ctd:client_id:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Clnt Tenure Yr (agrupación)]' derivation='None' name='[none:Clnt Tenure Yr (agrupación):ok]' pivot='key' type='ordinal' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.0suagyh0kg0lc61bxzjv80tkk7ql].[none:Clnt Tenure Yr (agrupación):ok]'>
+            <groupfilter from='1' function='range' level='[none:Clnt Tenure Yr (agrupación):ok]' to='27' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
+          <shelf-sorts>
+            <shelf-sort-v2 dimension-to-sort='[federated.0suagyh0kg0lc61bxzjv80tkk7ql].[none:Clnt Tenure Yr (agrupación):ok]' direction='DESC' is-on-innermost-dimension='true' measure-to-sort-by='[federated.0suagyh0kg0lc61bxzjv80tkk7ql].[ctd:client_id:qk]' shelf='rows' />
+          </shelf-sorts>
+          <slices>
+            <column>[federated.0suagyh0kg0lc61bxzjv80tkk7ql].[none:Clnt Tenure Yr (agrupación):ok]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='mark'>
+            <encoding attr='size-bar' field='[federated.0suagyh0kg0lc61bxzjv80tkk7ql].[ctd:client_id:qk]' field-type='quantitative' max-size='1' min-size='0.005' type='centersize' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+          </pane>
+        </panes>
+        <rows>[federated.0suagyh0kg0lc61bxzjv80tkk7ql].[none:Clnt Tenure Yr (agrupación):ok]</rows>
+        <cols>[federated.0suagyh0kg0lc61bxzjv80tkk7ql].[ctd:client_id:qk]</cols>
+      </table>
+      <simple-id uuid='{5C87157C-17F9-4FB6-9C6A-90EA3B3CEC19}' />
+    </worksheet>
+    <worksheet name='Tenure_AB'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run>Number of clients by Tenure (Years)
+</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='df_demo_merged_concat2' name='federated.0suagyh0kg0lc61bxzjv80tkk7ql' />
+          </datasources>
+          <datasource-dependencies datasource='federated.0suagyh0kg0lc61bxzjv80tkk7ql'>
+            <column aggregation='None' caption='Clnt Tenure Yr (agrupación)' datatype='integer' name='[Clnt Tenure Yr (agrupación)]' role='dimension' type='ordinal'>
+              <calculation class='bin' decimals='0' formula='[clnt_tenure_yr]' peg='0' size='1' />
+            </column>
+            <column datatype='string' name='[Variation]' role='dimension' type='nominal' />
+            <column caption='Client Id' datatype='real' name='[client_id]' role='measure' type='quantitative' />
+            <column caption='Clnt Tenure Yr' datatype='real' name='[clnt_tenure_yr]' role='dimension' type='quantitative' />
+            <column-instance column='[client_id]' derivation='CountD' name='[ctd:client_id:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Clnt Tenure Yr (agrupación)]' derivation='None' name='[none:Clnt Tenure Yr (agrupación):ok]' pivot='key' type='ordinal' />
+            <column-instance column='[Variation]' derivation='None' name='[none:Variation:nk]' pivot='key' type='nominal' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.0suagyh0kg0lc61bxzjv80tkk7ql].[none:Clnt Tenure Yr (agrupación):ok]'>
+            <groupfilter from='1' function='range' level='[none:Clnt Tenure Yr (agrupación):ok]' to='27' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
+          <filter class='categorical' column='[federated.0suagyh0kg0lc61bxzjv80tkk7ql].[none:Variation:nk]'>
+            <groupfilter function='except' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate'>
+              <groupfilter function='level-members' level='[none:Variation:nk]' />
+              <groupfilter function='member' level='[none:Variation:nk]' member='%null%' />
+            </groupfilter>
+          </filter>
+          <shelf-sorts>
+            <shelf-sort-v2 dimension-to-sort='[federated.0suagyh0kg0lc61bxzjv80tkk7ql].[none:Clnt Tenure Yr (agrupación):ok]' direction='DESC' measure-to-sort-by='[federated.0suagyh0kg0lc61bxzjv80tkk7ql].[ctd:client_id:qk]' shelf='columns' />
+          </shelf-sorts>
+          <slices>
+            <column>[federated.0suagyh0kg0lc61bxzjv80tkk7ql].[none:Clnt Tenure Yr (agrupación):ok]</column>
+            <column>[federated.0suagyh0kg0lc61bxzjv80tkk7ql].[none:Variation:nk]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <color column='[federated.0suagyh0kg0lc61bxzjv80tkk7ql].[none:Variation:nk]' />
+              <text column='[federated.0suagyh0kg0lc61bxzjv80tkk7ql].[ctd:client_id:qk]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='true' />
+                <format attr='mark-labels-cull' value='true' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[federated.0suagyh0kg0lc61bxzjv80tkk7ql].[ctd:client_id:qk]</rows>
+        <cols>([federated.0suagyh0kg0lc61bxzjv80tkk7ql].[none:Clnt Tenure Yr (agrupación):ok] / [federated.0suagyh0kg0lc61bxzjv80tkk7ql].[none:Variation:nk])</cols>
+      </table>
+      <simple-id uuid='{604D19E5-271E-43A2-BE6B-850B231E99BB}' />
+    </worksheet>
+    <worksheet name='Wealth'>
       <table>
         <view>
           <datasources />
@@ -522,11 +1206,42 @@
         <rows />
         <cols />
       </table>
-      <simple-id uuid='{E77E9705-F683-4EE9-A591-FA5014B5BD62}' />
+      <simple-id uuid='{292EC4B7-239E-46EB-A597-ECF61A871899}' />
     </worksheet>
   </worksheets>
   <windows source-height='30'>
-    <window class='worksheet' maximized='true' name='Hoja 1'>
+    <window class='worksheet' name='Age_histo'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='175'>
+            <card mode='checkdropdown' param='[federated.0suagyh0kg0lc61bxzjv80tkk7ql].[none:Variation:nk]' type='filter' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <zoom type='fit-width' />
+      </viewpoint>
+      <simple-id uuid='{D7FD7A28-159A-4FD0-A852-7E69488133AA}' />
+    </window>
+    <window class='worksheet' name='Age_group'>
       <cards>
         <edge name='left'>
           <strip size='160'>
@@ -547,7 +1262,253 @@
           </strip>
         </edge>
       </cards>
-      <simple-id uuid='{D7FD7A28-159A-4FD0-A852-7E69488133AA}' />
+      <viewpoint>
+        <floating-toolbar-visibility value='2' />
+      </viewpoint>
+      <simple-id uuid='{5FA70C5E-1AA7-43D8-B740-A759A87E4AAE}' />
+    </window>
+    <window class='worksheet' name='Age_group_AB' tab-color='#17927d'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card size='31' type='pages' />
+            <card size='69' type='filters' />
+            <card size='215' type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='175'>
+            <card mode='slider' param='[federated.0suagyh0kg0lc61bxzjv80tkk7ql].[none:Calculation_861665315621703681:nk]' type='filter' />
+            <card mode='slider' param='[federated.0suagyh0kg0lc61bxzjv80tkk7ql].[none:backward_steps:ok]' type='filter' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <floating-toolbar-visibility value='2' />
+      </viewpoint>
+      <simple-id uuid='{6E08BE57-D00F-4B8C-AD74-63A8789E43F7}' />
+    </window>
+    <window class='worksheet' maximized='true' name='Age_group_AB (2)' tab-color='#17927d'>
+      <cards>
+        <edge name='left'>
+          <strip size='175'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='175'>
+            <card pane-specification-id='0' param='[federated.0suagyh0kg0lc61bxzjv80tkk7ql].[ctd:visit_id:qk]' type='color' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <default-map-tool-selection tool='2' />
+      </viewpoint>
+      <simple-id uuid='{E65B2145-E964-4371-9DAA-B95DB481C3A2}' />
+    </window>
+    <window class='worksheet' name='Tenure'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{F62C05C9-0536-433C-8846-F594DCB5A8D7}' />
+    </window>
+    <window class='worksheet' name='Tenure_AB'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='175'>
+            <card pane-specification-id='0' param='[federated.0suagyh0kg0lc61bxzjv80tkk7ql].[none:Variation:nk]' type='color' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{9B76854D-331B-4559-8786-117CD529524E}' />
+    </window>
+    <window class='worksheet' name='Wealth'>
+      <cards>
+        <edge name='left'>
+          <strip size='175'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <default-map-tool-selection tool='2' />
+      </viewpoint>
+      <simple-id uuid='{21947D04-8686-419F-9D2A-557EFEE7D0E0}' />
+    </window>
+    <window class='worksheet' name='Gen'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='175'>
+            <card pane-specification-id='0' param='[federated.0suagyh0kg0lc61bxzjv80tkk7ql].[ctd:client_id:qk]' type='color' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{8473101E-F62F-4FCC-8A76-ADDC835BE0F4}' />
+    </window>
+    <window class='worksheet' name='Gen_' tab-color='#17927d'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='175'>
+            <card mode='slider' param='[federated.0suagyh0kg0lc61bxzjv80tkk7ql].[none:backward_steps:ok]' type='filter' />
+            <card mode='slider' param='[federated.0suagyh0kg0lc61bxzjv80tkk7ql].[none:Calculation_861665315621703681:nk]' type='filter' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{074D59A3-C69D-453C-A408-E30A79C4CBDA}' />
+    </window>
+    <window class='worksheet' name='Ctr_Tst'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{0311C24D-F565-4F97-8216-BEF21959FA2C}' />
+    </window>
+    <window class='worksheet' name='Ctr_Tst (2)'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{6709B648-AD28-4143-868F-288EDD538C62}' />
     </window>
   </windows>
 </workbook>
