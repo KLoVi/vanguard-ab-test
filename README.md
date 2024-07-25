@@ -22,7 +22,7 @@ c. Experiment Roster, cleaned: (df_final_clients.csv)
 
 Some other Data Frame where further created to enhace and explore visualizations. Also available on the file "Datasets_cleaned".
 
-First EDA with different graphics where performed in "Demo_filtered".
+First EDA with different graphics where performed in ("Demo_filtered").
 
 2. Performance Metrics (on file: "KPIs").  
 
@@ -36,7 +36,7 @@ Three KPIs where calculating using Python:
 
 After having the metrics results, three hypotheses testing where calculated: two for the completion rate, to establish if there was a statistically significant difference between the completion rates and additionally to measure if the cost-effectiveness threshold of 5% -set as a minimum by Vangard- was also statistically significant ("Hypotheses_Completion_Rate").
 
-We also tested if there are gender differences that affect engaging with the new or old process (extra_hypothesis_gender_completion).
+We also tested if there were statistically significant average age differences between the groups that where tested (extra_hypothesis_age).
 
 4. Experiment Evaluation: 
 
@@ -49,3 +49,5 @@ Additionaly we resproduce some visualizations made also in the first step of EDA
 
 
 Link Kanban: https://trello.com/b/T43vX0MQ/ironhack
+
+Link Presentatio: https://docs.google.com/presentation/d/1bnvXSfy3QBfNgh57pbH_tVHeg8G_mXOo/edit
