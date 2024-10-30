@@ -5,6 +5,7 @@ This project analyzes the results of a digital experiment—an A/B test—conduc
 The A/B Test setup consisted of two groups:
 
 **- Control Group:** Clients used Vanguard's traditional online process.
+
 **- Test Group:** Clients used the updated, enhanced digital interface. Both groups navigated through the same process sequence: an initial page, three subsequent steps, and a final confirmation page indicating process completion.
 
 **Project Steps:**
