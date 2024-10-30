@@ -8,6 +8,7 @@ The A/B Test setup consisted of two groups:
 
 **- Test Group:** Clients used the updated, enhanced digital interface. Both groups navigated through the same process sequence: an initial page, three subsequent steps, and a final confirmation page indicating process completion.
 
+
 **Project Steps:**
 
 **1. Exploratory Data Analysis (EDA) and Data Cleaning:** Three datasets were used:
