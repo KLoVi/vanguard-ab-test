@@ -14,22 +14,29 @@ The A/B Test setup consisted of two groups:
 **1. Exploratory Data Analysis (EDA) and Data Cleaning:** Three datasets were used:
 
 **- Client Profiles** (df_final_demo): Contained demographics like age, gender, and account details.
+
 **- Digital Footprints** (df_final_web_data): Tracked detailed client interactions online, merged from two parts (pt_1 and pt_2).
+
 **- Experiment Roster** (df_final_experiment_clients): Listed clients participating in the experiment.
 
 After exploring and cleaning these datasets, cleaned versions were compiled to facilitate further analysis.
 
+
 **2. Performance Metrics:** Using Python, three key performance indicators (KPIs) were calculated:
 
 **- Completion Rate:** The proportion of users who reached the final 'confirm' step.
+
 **- Time Spent on Each Step:** The average duration users spent on each step.
+
 **- Error Rates:** The frequency of users navigating backward, indicating potential confusion or errors.
+
 
 **3. Hypothesis Testing:** Based on the KPIs, three hypothesis tests were conducted:
 
 Two tests focused on determining whether there was a statistically significant difference in completion rates between the control and test groups, including whether Vanguard's minimum cost-effectiveness threshold of 5% was met.
 
 An additional test examined whether there were statistically significant differences in average age between the groups.
+
 
 **4. Experiment Evaluation:** We evaluated the effectiveness of the new design and the assessment period, addressing key questions about user experience and design improvements.
 
