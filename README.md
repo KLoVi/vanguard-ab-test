@@ -44,7 +44,7 @@ We reflected about the design effectiveness and the duration of the assesment, a
 
 5. Tableau: 
 
-Finally we created a dashboard in Tableum showcasing the A/B test results including completion rates, time spent on each step, error rates for both the Test and Control groups. 
+Finally we created a dashboard in Tableau showcasing the A/B test results including completion rates, time spent on each step, error rates for both the Test and Control groups. 
 Additionaly we resproduce some visualizations made also in the first step of EDA in Python regarding client demographics, this time using Tableau. 
 
 
